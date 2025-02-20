@@ -1,0 +1,5 @@
+{
+      "watch": ["version", "config.js", "index.js" ],
+      "ext": ".js, .yaml, .json",
+      "ignore": []
+}

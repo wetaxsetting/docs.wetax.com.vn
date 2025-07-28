@@ -692,6 +692,82 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PosCancelInvoiceResponse409"
+  
+  /api/wtx/pa/v1/pos/invoices-publish:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - POS Invoice
+      summary: "Create invoices."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInvoicesModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PosInvoicePublishModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/pos/invoices-issue:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - POS Invoice
+      summary: "Create invoices."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInvoicesModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PosInvoicePublishModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
   #------------------------END-POS-Invoice---------------------------
 
   #------------------------IPOS--------------------------------------
@@ -3809,6 +3885,11 @@ components:
                 example: "31321331321231"
                 description: "Refid of order number (ORDER NUMBER (ref_id))"
                 maxLength: 100
+              lease_invoice_type:
+                type: string
+                example: "0"
+                description: "Lease invoice type (0: Normal; 1: Lease)"
+                maxLength: 1  
               invoice_type:
                 type: string
                 example: "0"
@@ -3883,6 +3964,21 @@ components:
                 example: ""
                 description: "Buyer name"
                 maxLength: 400
+              buyer_cccd:
+                type: string
+                example: ""
+                description: "Buyer CCCD"
+                maxLength: 20
+              buyer_passport_no:
+                type: string
+                example: ""
+                description: "Buyer passport no"
+                maxLength: 20
+              buyer_budget_unit_code:
+                type: string
+                example: ""
+                description: "Buyer budget unit code"
+                maxLength: 7    
               buyer_email:
                 type: string
                 example: "abc@Gmail.com"
@@ -4073,7 +4169,96 @@ components:
                       example: ""
                       description: "Attribute 5"
                       maxLength: 500
-     
+                    attr06:
+                      type: string
+                      example: ""
+                      description: "Attribute 6"
+                      maxLength: 500
+                    attr07:
+                      type: string
+                      example: ""
+                      description: "Attribute 7"
+                      maxLength: 500
+                    attr08:
+                      type: string
+                      example: ""
+                      description: "Attribute 8"
+                      maxLength: 500
+                    attr09:
+                      type: string
+                      example: ""
+                      description: "Attribute 9"
+                      maxLength: 500
+                    attr10:
+                      type: string
+                      example: ""
+                      description: "Attribute 10"
+                      maxLength: 500
+    PosInvoicePublishModelResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "success"
+        data:
+          type: object
+          properties:
+            invoices:
+              type: array
+              items:
+                type: object
+                properties:
+                  sid:
+                    type: string
+                    example: "175398"
+                  ref_id:
+                    type: string
+                    example: "9a6100b6-141b-92ad-dedc-edce64e4b2da"
+                  form_no:
+                    type: string
+                    example: "1"
+                  serial_no:
+                    type: string
+                    example: "C24TMT"
+                  invoice_no:
+                    type: string
+                    example: "56"
+                  invoice_type: 
+                    type: string
+                    example: "Original"
+                  cqt_report_status: 
+                    type: string
+                    example: "Reported"
+                  issuance_status:
+                    type: string
+                    example: "Issued"
+                  email_status:
+                    type: string
+                    example: "Sent"
+                  lookup_code:
+                    type: string
+                    example: "JGSJIAIQ"
+                  lookup_url:
+                    type: string
+                    example: "string"
+                  cqt_code:
+                    type: string
+                    example: ""
+                  seller_signature_time: 
+                    type: string
+                    example: ""
+                  tax_signature_time:
+                    type: string
+                    example: ""
+                  error_message:
+                    type: string
+                    example: ""
     InvoiceIssueModelResponse200:
       type: object
       properties:
@@ -4162,6 +4347,9 @@ components:
               status:
                 type: string
                 example: "OK"
+              lookup_url:
+                type: string
+                example: "https://wetax.com.vn/view/lotte-logistic?guid=34db2fd5-1e7e-486a-8d8f-7e360570b406"
               error:
                 type: string
                 example: ""              

@@ -4072,7 +4072,7 @@ components:
                       type: number
                       example: 0
                       description: "Discount amount"
-                    total_amount:
+                    amount:
                       type: number
                       example: 197222
                     vat_rate:
@@ -4264,7 +4264,7 @@ components:
                       type: number
                       example: 0
                       description: "Discount amount"
-                    total_amount:
+                    amount:
                       type: number
                       example: 197222
                     vat_rate:

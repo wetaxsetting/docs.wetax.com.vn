@@ -1106,6 +1106,43 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
+  /api/wtx/pa/v1/erp/invoices-update:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - ERP
+      summary: "Invoices create"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoicesUpdateModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCreateModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
   # -----------------------END-Normal-Invoice------------------------
   
   #------------------------Sender------------------------------------
@@ -4211,6 +4248,27 @@ components:
                       example: ""
                       description: "Attribute 10"
                       maxLength: 500
+    InvoicesUpdateModelRequest:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+              - invoice_date
+            properties:
+              ref_id:
+                type: string
+                example: "31321331321231"
+                description: "Refid of order number (ORDER NUMBER (ref_id))"
+                maxLength: 100            
+              invoice_date:
+                type: string
+                example: "20240101120000"
+                description: "Invoice date (Delivery date: yyyymmddhhmmss) datetime"
+                maxLength: 14
     PosInvoicePublishModelResponse200:
       type: object
       properties:

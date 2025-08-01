@@ -3701,6 +3701,23 @@ components:
     CreateInvoicesModelRequest:
       type: object
       properties:
+        seller: 
+          type: object
+          properties:
+            tax_code:
+              type: string
+              example: "1201496252"
+              description: "Tax code"
+              maxLength: 14
+            store_code:
+              type: string
+              example: "0909011123"
+              maxLength: 50
+            data_source:
+              type: string
+              example: "ERPWEBCASH"
+              description: "Data source (Dedualt = ‘ERPWEBCASH’)"
+              maxLength: 400
         invoices:
           type: array
           items:

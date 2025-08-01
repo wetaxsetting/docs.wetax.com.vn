@@ -704,7 +704,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateInvoicesModelRequest"
+              $ref: "#/components/schemas/PartnerInvoicesPublishModelRequest"
       responses:
         "200":
           description: Success.
@@ -742,7 +742,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateInvoicesModelRequest"
+              $ref: "#/components/schemas/PartnerInvoicesIssueModelRequest"
       responses:
         "200":
           description: Success.
@@ -3895,7 +3895,391 @@ components:
                     paying_amount:
                       type: string
                       example: "213000"
-    
+    PartnerInvoicesIssueModelRequest:
+      type: object
+      properties:
+        seller: 
+          type: object
+          required:
+            - tax_code
+            - store_code
+          properties:
+            tax_code:
+              type: string
+              example: "1201496252"
+              description: "Tax code"
+              maxLength: 14
+            store_code:
+              type: string
+              example: "0909011123"
+              maxLength: 50
+            store_name:
+              type: string
+              example: "DUONG BA TRAC"
+              description: "Store Name"
+              maxLength: 400
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+              - order_date
+              - cqt_code
+              - pos_number
+              - order_id
+              - list_product
+            properties:
+              order_date:
+                  type: string
+                  example: "YYYYMMDDHHMMSS"
+                  description: "YYYYMMDDHHMMSS"
+              ref_id:
+                type: string
+                example: "163003230305273"
+                description: "Invoice ID"
+              cqt_code:
+                type: string
+                example: ""
+              bill_no:
+                type: string
+                example: "1769"
+              pos_no:
+                type: string
+                example: "003"
+                description: "POS Number"
+              invoice_type:
+                type: string
+                example: "1"
+                description: "0: HD gốc ; 1: HD thay thế ; 2: HD điều chỉnh"
+              form_no:
+                  type: string
+                  example: "1"
+                  description: "Form no"
+              serial_no:
+                type: string
+                example: "C24MAA"
+                description: "Serial no"
+              trans_type:
+                type: string
+                example: "1"
+                description: "1: Sales ; 2: Return"
+              currency_code:
+                type: string
+                example: "VND"
+                description: "Currency"
+              exchange_rate:
+                type: number
+                example: 1.0
+                description: "Exchange rate"
+              payment_method:
+                type: string
+                example: "TM/CK"
+                description: "Payment method"
+              buyer_comp_name:
+                type: string
+                example: ""
+                description: "Buyer company name"
+              buyer_comp_tax_code:
+                type: string
+                example: ""
+                description: "Buyer tax code"
+              buyer_address:
+                type: string
+                example: ""
+                description: "Buyer address"
+              buyer_tel:
+                type: string
+                example: ""
+                description: "Buyer telephone"
+              buyer_name:
+                type: string
+                example: ""
+                description: "Buyer name"
+              buyer_email:
+                type: string
+                example: ""
+                description: "Buyer email"
+              buyer_email_cc:
+                type: string
+                example: ""
+                description: "Buyer email"
+              buyer_cccd:
+                type: string
+                example: ""
+                description: "Buyer CCCD"
+              buyer_passport_no:
+                type: string
+                example: ""
+                description: "Buyer passport no"
+              buyer_budget_unit_code:
+                type: string
+                example: ""
+                description: "Buyer budget unit code"
+              tot_amount:
+                type: number
+                example: 134000 
+                description: "Total amount"
+              tot_dc_amount:
+                type: number
+                example: 0
+                description: "Total discount amount"
+              tot_vat_amount:
+                type: number
+                example: 13400
+                description: "Total vat amount"    
+              tot_pay_amount:
+                type: number
+                example: 147400
+              invoice_details:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - feature
+                    - item_name
+                    - unit_price
+                    - quantity
+                    - uom
+                    - total_amount
+                    - vat_rate
+                    - vat_amount
+                    - paying_amount
+                  properties:
+                    seq:
+                      type: string
+                      example: "1"
+                    item_code:
+                      type: string
+                      example: "228785"
+                    item_name:
+                      type: string
+                      example: "GA RAN PHAN"
+                    uom:
+                      type: string
+                      example: "EA"
+                    quantity:
+                      type: number
+                      example: 2
+                    unit_price:
+                      type: number
+                      example: 67000
+                    dc_rate:
+                      type: string
+                      example: ""
+                      description: "Discount rate"
+                    dc_amount:
+                      type: number
+                      example: 0
+                      description: "Discount amount"
+                    total_amount:
+                      type: number
+                      example: 197222
+                    vat_rate:
+                      type: string
+                      example: "8"
+                    vat_amount:
+                      type: number
+                      example: 15778
+                    pay_amount:
+                      type: number
+                      example: 213000
+                    feature:
+                      type: string
+                      example: "1"
+                      description: "1: Goods and services; 2: Promotions; 3: Trade discount; 4: Notes"
+    PartnerInvoicesPublishModelRequest:
+      type: object
+      properties:
+        seller: 
+          type: object
+          required:
+            - tax_code
+            - store_code
+          properties:
+            tax_code:
+              type: string
+              example: "1201496252"
+              description: "Tax code"
+              maxLength: 14
+            store_code:
+              type: string
+              example: "0909011123"
+              maxLength: 50
+            store_name:
+              type: string
+              example: "DUONG BA TRAC"
+              description: "Store Name"
+              maxLength: 400
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+              - order_date
+              - pos_number
+              - order_id
+              - list_product
+            properties:
+              order_date:
+                  type: string
+                  example: "YYYYMMDDHHMMSS"
+                  description: "YYYYMMDDHHMMSS"
+              ref_id:
+                type: string
+                example: "163003230305273"
+                description: "Invoice ID"
+              cqt_code:
+                type: string
+                example: ""
+              bill_no:
+                type: string
+                example: "1769"
+              pos_no:
+                type: string
+                example: "003"
+                description: "POS Number"
+              invoice_type:
+                type: string
+                example: "1"
+                description: "0: HD gốc ; 1: HD thay thế ; 2: HD điều chỉnh"
+              form_no:
+                  type: string
+                  example: "1"
+                  description: "Form no"
+              serial_no:
+                type: string
+                example: "C24MAA"
+                description: "Serial no"
+              trans_type:
+                type: string
+                example: "1"
+                description: "1: Sales ; 2: Return"
+              currency_code:
+                type: string
+                example: "VND"
+                description: "Currency"
+              exchange_rate:
+                type: number
+                example: 1.0
+                description: "Exchange rate"
+              payment_method:
+                type: string
+                example: "TM/CK"
+                description: "Payment method"
+              buyer_comp_name:
+                type: string
+                example: ""
+                description: "Buyer company name"
+              buyer_comp_tax_code:
+                type: string
+                example: ""
+                description: "Buyer tax code"
+              buyer_address:
+                type: string
+                example: ""
+                description: "Buyer address"
+              buyer_tel:
+                type: string
+                example: ""
+                description: "Buyer telephone"
+              buyer_name:
+                type: string
+                example: ""
+                description: "Buyer name"
+              buyer_email:
+                type: string
+                example: ""
+                description: "Buyer email"
+              buyer_email_cc:
+                type: string
+                example: ""
+                description: "Buyer email"
+              buyer_cccd:
+                type: string
+                example: ""
+                description: "Buyer CCCD"
+              buyer_passport_no:
+                type: string
+                example: ""
+                description: "Buyer passport no"
+              buyer_budget_unit_code:
+                type: string
+                example: ""
+                description: "Buyer budget unit code"
+              tot_amount:
+                type: number
+                example: 134000 
+                description: "Total amount"
+              tot_dc_amount:
+                type: number
+                example: 0
+                description: "Total discount amount"
+              tot_vat_amount:
+                type: number
+                example: 13400
+                description: "Total vat amount"    
+              tot_pay_amount:
+                type: number
+                example: 147400
+              invoice_details:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - feature
+                    - item_name
+                    - unit_price
+                    - quantity
+                    - uom
+                    - total_amount
+                    - vat_rate
+                    - vat_amount
+                    - paying_amount
+                  properties:
+                    seq:
+                      type: string
+                      example: "1"
+                    item_code:
+                      type: string
+                      example: "228785"
+                    item_name:
+                      type: string
+                      example: "GA RAN PHAN"
+                    uom:
+                      type: string
+                      example: "EA"
+                    quantity:
+                      type: number
+                      example: 2
+                    unit_price:
+                      type: number
+                      example: 67000
+                    dc_rate:
+                      type: string
+                      example: ""
+                      description: "Discount rate"
+                    dc_amount:
+                      type: number
+                      example: 0
+                      description: "Discount amount"
+                    total_amount:
+                      type: number
+                      example: 197222
+                    vat_rate:
+                      type: string
+                      example: "8"
+                    vat_amount:
+                      type: number
+                      example: 15778
+                    pay_amount:
+                      type: number
+                      example: 213000
+                    feature:
+                      type: string
+                      example: "1"
+                      description: "1: Goods and services; 2: Promotions; 3: Trade discount; 4: Notes"
     InvoicesCreateModelRequest:
       type: object
       properties:

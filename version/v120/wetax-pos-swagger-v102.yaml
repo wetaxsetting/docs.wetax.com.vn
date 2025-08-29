@@ -1284,6 +1284,123 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
   #-----------------------END-Common---------------------------------
+
+  #------------------------EPit------------------------------------
+  /api/wtx/pa/v1/pit/pit-create:
+    get:
+      security:
+        - Authorization: []
+      tags:
+        - EPit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EPitCreateModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCreateModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/pit/pit-status:
+    get:
+      security:
+        - Authorization: []
+      tags:
+        - EPit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetStatusEPitModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetStatusInvoicesModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/pit/pit-delete:
+    get:
+      security:
+        - Authorization: []
+      tags:
+        - EPit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetStatusEPitModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetStatusDeleteEPitModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+
+  #------------------------END-EPit------------------------------------
+
+
 # =================================================================
 components:
   securitySchemes:
@@ -3278,10 +3395,47 @@ components:
                 type: string
                 example: ""
 
+    GetStatusDeleteEPitModelResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "200"
+            message:
+              type: string
+              example: success
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              ref_id:
+                type: string
+                example: "936324"
+              delete_yn:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: "Not found"
+
     GetStatusInvoicesModelRequest:
       type: object
       properties:
         invoices:
+          type: array
+          items:
+            type: string
+            example: "ref_id"
+            description: "Invoice ID from Parter"
+
+    GetStatusEPitModelRequest:
+      type: object
+      properties:
+        pit:
           type: array
           items:
             type: string
@@ -4659,6 +4813,203 @@ components:
                 example: "20240101120000"
                 description: "Invoice date (Delivery date: yyyymmddhhmmss) datetime"
                 maxLength: 14
+    EPitCreateModelRequest:
+      type: object
+      properties:
+        seller:
+          type: object
+          properties:
+            tax_code:
+              type: string
+              example: "1201496252"
+              description: "Tax code"
+              maxLength: 14
+            data_source:
+              type: string
+              example: "ERPWEBCASH"
+              description: "Data source (Dedualt = ‘ERPWEBCASH’)"
+              maxLength: 400
+        pit:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+              - invoice_type
+              - form_no
+              - serial_no
+              - invoice_date
+              - comp_name
+              - tax_code
+              - address
+              - taxpayer_name
+              - taxpayer_address
+              - taxpayer_resident
+              - taxpayer_phone
+              - income_type
+              - income_from_mon
+              - income_to_mon
+              - income_year
+              - final_insurance_amt
+              - donations_amt
+              - final_income_amt
+              - final_income_before_tax
+              - final_income_tax
+            properties:
+              ref_id:
+                type: string
+                example: "31321331321231"
+                description: "Refid of order number (ORDER NUMBER (ref_id))"
+                maxLength: 100
+              invoice_type:
+                type: string
+                example: "0"
+                maxLength: 1
+                description: "0: Original / 6: Replacement / 7: Adjustment"
+              form_no:
+                type: string
+                example: "1"
+                description: "Form no"
+                maxLength: 1
+              serial_no:
+                type: string
+                example: "C24TAA"
+                description: "Serial no"
+                maxLength: 6
+              invoice_date:
+                type: string
+                example: "20240101120000"
+                description: "Invoice date (Delivery date: yyyymmddhhmmss) datetime"
+                maxLength: 14
+              invoice_no:
+                type: string
+                example: ""
+                description: "Invoice no"
+                maxLength: 6
+              invoice_feature:
+                type: number
+                example: ""
+                description: "1: replace; 2: adjust"
+              invoice_type_relative:
+                type: string
+                example: ""
+                description: "invoice type related to this invoice"
+                maxLength: 1
+              form_no_relative:
+                type: string
+                example: ""
+                description: "form no related to this invoice"
+              serial_no_relative:
+                type: string
+                example: ""
+                description: "serial no related to this invoice"
+                maxLength: 6
+              invoice_no_relative:
+                type: string
+                example: ""
+                description: "invoice no related to this invoice"
+                maxLength: 8
+              invoice_date_relative:
+                type: string
+                example: ""
+                description: "invoice date related to this invoice"
+                maxLength: 14
+              note_relative:
+                type: string
+                example: ""
+                description: "adjustment or replacement information"
+                maxLength: 255
+              comp_name:
+                type: string
+                maxLength: 400
+                description: "Payer Organization – Full name"
+              tax_code:
+                type: string
+                maxLength: 14
+                description: "Payer Organization – Tax Code"
+              address:
+                type: string
+                maxLength: 400
+                description: "Payer Organization – Address"
+              phone:
+                type: string
+                maxLength: 20
+                description: "Payer Organization – Phone number"
+              taxpayer_name:
+                type: string
+                maxLength: 400
+                description: "Taxpayer – Full Name"
+              taxpayer_pit_tax_code:
+                type: string
+                maxLength: 14
+                description: "Taxpayer – PIT Tax Code"
+              taxpayer_address:
+                type: string
+                maxLength: 400
+                description: "Taxpayer - Address"
+              taxpayer_nation:
+                type: string
+                maxLength: 400
+                description: "Taxpayer - Nation"
+              taxpayer_resident:
+                type: string
+                maxLength: 1
+                description: "Taxpayer - Resident"
+              taxpayer_cid:
+                type: string
+                maxLength: 20
+                description: "Taxpayer - Citizen Identification (ID No./Passport No./Personal Identification Number)"
+              taxpayer_phone:
+                type: string
+                maxLength: 20
+                description: "Taxpayer – Phone Number"
+              taxpayer_email:
+                type: string
+                maxLength: 50
+                description: "Taxpayer - Email"
+              taxpayer_email_cc:
+                type: string
+                maxLength: 500
+                description: "Taxpayer – Email CC"
+              taxpayer_note:
+                type: string
+                maxLength: 255
+                description: "Taxpayer - Note"
+              income_type:
+                type: string
+                maxLength: 250
+                description: "Income Type"
+              income_from_mon:
+                type: number
+                maxLength: 2
+                description: "From mon (Tháng bắt đầu trả thu nhập)"
+              income_to_mon:
+                type: number
+                maxLength: 2
+                description: "To mon (Tháng cuối cùng trả thu nhập)"
+              income_year:
+                type: number
+                maxLength: 4
+                description: "Year (Thời điểm trả thu nhập)"
+              final_insurance_amt:
+                type: number
+                description: "Income Insurance (Khoản đóng bảo hiểm bắt buộc) FINAL INSURANCE AMT"
+              donations_amt:
+                type: number
+                description: "Income Donations (Khoản từ thiện, nhân đạo, khuyến học)"
+              final_income_amt:
+                type: number
+                description: "Total Taxable Income (Tổng thu nhập chịu thuế phải khấu trừ) FINAL INCOME AMT"
+              final_income_before_tax:
+                type: number
+                description: "Total Assessable Income (Tổng thu nhập tính thuế) FINAL INCOME BEFORE TAX"
+              final_income_tax:
+                type: number
+                description: "Số thuế (Số thuế thu nhập cá nhân đã khấu trừ) FINAL INCOME TAX"
+              remark:
+                type: string
+                maxLength: 255
+                description: "Remark"
     PosInvoicePublishModelResponse200:
       type: object
       properties:

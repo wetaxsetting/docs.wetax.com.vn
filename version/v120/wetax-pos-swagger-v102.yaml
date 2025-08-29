@@ -1303,7 +1303,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InvoiceCreateModelResponse200"
+                $ref: "#/components/schemas/InvoiceEPitModelResponse200"
         "400":
           description: Some fields are invalid!
           content:
@@ -5168,7 +5168,39 @@ components:
                 example: "https://wetax.com.vn/view/lotte-logistic?guid=34db2fd5-1e7e-486a-8d8f-7e360570b406"
               error:
                 type: string
-                example: ""              
+                example: ""
+    InvoiceEPitModelResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: number
+              example: 200
+            message:
+              type: string
+              example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              ref_id:
+                type: string
+                example: "31321331321231"
+              sid:
+                type: string
+                example: "43534543"
+              status:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: "success"
     ItemsModelRequest:
       type: object
       properties:

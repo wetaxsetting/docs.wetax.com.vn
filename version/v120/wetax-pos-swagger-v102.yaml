@@ -3435,7 +3435,7 @@ components:
     GetStatusEPitModelRequest:
       type: object
       properties:
-        pit:
+        pits:
           type: array
           items:
             type: string

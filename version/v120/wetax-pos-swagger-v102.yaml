@@ -4868,12 +4868,12 @@ components:
                 description: "0: Original / 6: Replacement / 7: Adjustment"
               form_no:
                 type: string
-                example: "1"
+                example: "03/TNCN"
                 description: "Form no"
                 maxLength: 1
               serial_no:
                 type: string
-                example: "C24TAA"
+                example: "CT/25E"
                 description: "Serial no"
                 maxLength: 6
               invoice_date:

@@ -1377,7 +1377,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetStatusDeleteEPitModelResponse200"
+                $ref: "#/components/schemas/GetStatusEPitModelResponse200"
         "400":
           description: Some fields are invalid!
           content:
@@ -3395,6 +3395,67 @@ components:
                 type: string
                 example: ""
 
+    GetStatusEPitModelResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "200"
+            message:
+              type: string
+              example: success
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              sid:
+                type: string
+                example: "175398"
+              ref_id:
+                type: string
+                example: "936324"
+              symbol:
+                type: string
+                example: "03/TNCN-CT/25E"
+              invoice_no:
+                type: string
+                example: "56"
+              form_no:
+                type: string
+                example: "03/TNCN"
+              serial_no:
+                type: string
+                example: "CT/25E"
+              invoice_type:
+                type: string
+                example: "Original"
+              cqt_report_status:
+                type: string
+                example: "Reported"
+              issuance_status:
+                type: string
+                example: "Issued"
+              email_status:
+                type: string
+                example: "Sent"
+              lookup_code:
+                type: string
+                example: "JGSJIAIQ"
+              lookup_url:
+                type: string
+              cqt_code:
+                type: string
+                example: ""
+              seller_signature_time:
+                type: string
+                example: ""
+              tax_signature_time:
+                type: string
+                example: ""
     GetStatusDeleteEPitModelResponse200:
       type: object
       properties:

@@ -1340,7 +1340,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetStatusInvoicesModelResponse200"
+                $ref: "#/components/schemas/GetStatusEPitModelResponse200"
         "400":
           description: Some fields are invalid!
           content:
@@ -1377,7 +1377,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetStatusEPitModelResponse200"
+                $ref: "#/components/schemas/GetStatusDeleteEPitModelResponse200"
         "400":
           description: Some fields are invalid!
           content:

@@ -5414,6 +5414,9 @@ components:
               logo:
                 type: string
                 description: "Logo url"
+              pos_no:
+                type: string
+                description: "Pos no"
 
     GetCompanyModelResponse200:
       type: object

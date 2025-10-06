@@ -5223,7 +5223,10 @@ components:
                 example: "OK"
               lookup_url:
                 type: string
-                example: "https://wetax.com.vn/view/lotte-logistic?guid=34db2fd5-1e7e-486a-8d8f-7e360570b406"
+                example: "https://wetax.com.vn/view/{end-point}?guid=34db2fd5-1e7e-486a-8d8f-7e360570b406"
+              sid:
+                type: number
+                example: 654645
               error:
                 type: string
                 example: ""

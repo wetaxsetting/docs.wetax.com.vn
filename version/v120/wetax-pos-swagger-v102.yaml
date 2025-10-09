@@ -1643,6 +1643,9 @@ components:
                   status_name:
                     type: string
                     example: ""
+            end_point:
+              type: string
+              example: "webcashvn"
 
     ErpListInvoiceModelResponse200:
       type: object

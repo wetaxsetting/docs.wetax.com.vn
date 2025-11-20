@@ -4659,7 +4659,7 @@ components:
                 properties:
                     invoice_nature:
                       type: string
-                      example: "1"
+                      example: ""
                       description: "Tính chất của hóa đơn liên quan"
                       maxLength: 1
                     related_invoice_type:

@@ -1144,6 +1144,82 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
+  
+  /api/wtx/pa/v1/erp/delivery-note-create:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - ERP
+      summary: "Invoices create"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeliveryNoteCreateModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCreateModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/erp/delivery-note-issue:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - ERP
+      summary: "Invoices create"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeliveryNoteCreateModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCreateModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
   # -----------------------END-Normal-Invoice------------------------
   
   #------------------------Sender------------------------------------
@@ -4496,6 +4572,283 @@ components:
                       type: string
                       example: "1"
                       description: "1: Goods and services; 2: Promotions; 3: Trade discount; 4: Notes"
+    DeliveryNoteCreateModelRequest:
+      type: object
+      properties:
+        seller: 
+          type: object
+          properties:
+              tax_code:
+                type: string
+                example: "1201496252"
+                description: "Tax code"
+                maxLength: 14
+              store_code:
+                type: string
+                example: "0909011123"
+                maxLength: 50
+              data_source:
+                type: string
+                example: "ERPWEBCASH"
+                description: "Data source (Dedualt = ‘ERPWEBCASH’)"
+                maxLength: 400
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+              - invoice_type
+              - form_no
+              - serial_no
+              - delivery_note_date
+              - currency
+              - tot_amount
+              - tot_pay_amount
+            properties:
+              ref_id:
+                type: string
+                example: "31321331321231"
+                description: "Refid of order number (ORDER NUMBER (ref_id))"
+                maxLength: 100
+              invoice_type:
+                type: string
+                example: "0"
+                maxLength: 1
+                description: "0: Original / 6: Replacement / 7: Adjustment"
+              form_no:
+                type: string
+                example: "1"
+                description: "Form no"
+                maxLength: 1
+              serial_no:
+                type: string
+                example: "C25NWA"
+                description: "Serial no"
+                maxLength: 6
+              delivery_note_date:
+                type: string
+                example: "20240101120000"
+                description: "Invoice date (Delivery date: yyyymmddhhmmss) datetime"
+                maxLength: 14
+              invoice_no:
+                type: string
+                example: ""
+                description: "Invoice no"
+                maxLength: 6
+              currency:
+                type: string
+                example: "VND"
+                description: "Currency (Defualt = VND)"
+                maxLength: 3
+              exchange_rate:
+                type: number
+                example: 1
+                description: "Exchange rate (Defualt = 1)"
+              total_amount:
+                type: number
+                example: 1000000 
+                description: "Total amount"
+              total_amount_in_words:
+                type: string
+                example: "One million dong"
+                description: "Total amount in words"
+                maxLength: 400
+              related_invoice:
+                type: object
+                properties:
+                    invoice_nature:
+                      type: string
+                      example: "1"
+                      description: "Tính chất của hóa đơn liên quan"
+                      maxLength: 1
+                    related_invoice_type:
+                      type: string
+                      example: "Loại hóa đơn liên quan"
+                      maxLength: 1
+                    related_form_no:
+                      type: string
+                      example: ""
+                      description: "Ký hiệu mẫu số hóa đơn liên quan"
+                      maxLength: 11
+                    related_serial_no:
+                      type: string
+                      example: "C25NWA"
+                      description: "Ký hiệu hóa đơn liên quan"
+                      maxLength: 8
+                    related_invoice_no:
+                      type: string
+                      example: ""
+                      description: "Số hóa đơn liên quan"
+                      maxLength: 8
+                    related_invoice_date:
+                      type: string
+                      example: ""
+                      description: "Ngay hóa đơn liên quan"
+                      maxLength: 10
+                    relation_note:
+                      type: string
+                      example: "ERPWEBCASH"
+                      description: "Ghi chú về hóa đơn liên quan"
+                      maxLength: 255  
+              exporter:
+                type: object
+                properties:
+                  exporter_name:
+                    type: string
+                    example: "ABC COMPANY"
+                    description: "Exporter name"
+                    maxLength: 400
+                  exporter_tax_code:
+                    type: string
+                    example: "0101234567"
+                    description: "exporter tax code"
+                    maxLength: 20
+                  internal_transfer_order_no:
+                    type: string
+                    example: "LDDNB-001/2025"
+                    description: "internal transfer order no"
+                    maxLength: 20
+                  warehouse_from_address:
+                    type: string
+                    example: "Warehouse A, Binh Thanh, HCMC"
+                    description: "warehouse from address"
+                    maxLength: 20
+                  transport_contract_no:
+                    type: string
+                    example: ""
+                    description: "transport contract no"
+                    maxLength: 20
+                  exporter_person_name:
+                    type: string
+                    example: "Nguyen Van A"
+                    description: "exporter person name"
+                    maxLength: 20
+                  carrier_name:
+                    type: string
+                    example: "Tran Van B"
+                    description: "carrier name"
+                    maxLength: 20
+                  transport_means:
+                    type: string
+                    example: "Truck 51C-123.45"
+                    description: "transport means"
+                    maxLength: 20
+                  transfer_purpose:
+                    type: string
+                    example: ""
+                    description: "transfer purpose"
+                    maxLength: 20
+              receiver: 
+                type: object
+                properties:
+                  receiver_name:
+                    type: string
+                    example: "XYZ COMPANY"
+                    description: "Receiver name"
+                    maxLength: 400
+                  receiver_tax_code:
+                    type: string
+                    example: "0201234567"
+                    description: "Receiver tax code"
+                    maxLength: 20
+                  warehouse_to_address:
+                    type: string
+                    example: "Warehouse B, District 1, HCMC"
+                    description: "warehouse to address"
+                    maxLength: 20
+                  receiver_person_name:
+                    type: string
+                    example: "Le Thi C"
+                    description: "receiver person name"
+                    maxLength: 20
+              details:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - seq
+                    - item_name
+                    - uom
+                    - quantity
+                    - amount
+                    - feature
+                  properties:
+                    feature:
+                      type: string
+                      example: "1"
+                      description: "1: Goods and services; 2: Promotions; 3: Trade discount; 4: Notes"
+                    seq:
+                      type: string
+                      example: "1"
+                    item_code:
+                      type: string
+                      example: "HH001"
+                    item_name:
+                      type: string
+                      example: "Sample Item 1"
+                    uom:
+                      type: string
+                      example: "EA"
+                    quantity:
+                      type: number
+                      example: 10
+                    unit_price:
+                      type: number
+                      example: 100000
+                    amount:
+                      type: number
+                      example: 1000000
+                    attr01:
+                      type: string
+                      example: ""
+                      description: "Attribute 1"
+                      maxLength: 500
+                    attr02:
+                      type: string
+                      example: ""
+                      description: "Attribute 2"
+                      maxLength: 500
+                    attr03:
+                      type: string
+                      example: ""
+                      description: "Attribute 3"
+                      maxLength: 500
+                    attr04:
+                      type: string
+                      example: ""
+                      description: "Attribute 4"
+                      maxLength: 500
+                    attr05:
+                      type: string
+                      example: ""
+                      description: "Attribute 5"
+                      maxLength: 500
+                    attr06:
+                      type: string
+                      example: ""
+                      description: "Attribute 6"
+                      maxLength: 500
+                    attr07:
+                      type: string
+                      example: ""
+                      description: "Attribute 7"
+                      maxLength: 500
+                    attr08:
+                      type: string
+                      example: ""
+                      description: "Attribute 8"
+                      maxLength: 500
+                    attr09:
+                      type: string
+                      example: ""
+                      description: "Attribute 9"
+                      maxLength: 500
+                    attr10:
+                      type: string
+                      example: ""
+                      description: "Attribute 10"
+                      maxLength: 500
     InvoicesCreateModelRequest:
       type: object
       properties:
@@ -4853,6 +5206,7 @@ components:
                       example: ""
                       description: "Attribute 10"
                       maxLength: 500
+
     InvoicesUpdateModelRequest:
       type: object
       properties:

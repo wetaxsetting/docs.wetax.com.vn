@@ -4664,7 +4664,8 @@ components:
                       maxLength: 1
                     related_invoice_type:
                       type: string
-                      example: "Loại hóa đơn liên quan"
+                      example: ""
+                      description: "Loại hóa đơn liên quan"
                       maxLength: 1
                     related_form_no:
                       type: string
@@ -4673,7 +4674,7 @@ components:
                       maxLength: 11
                     related_serial_no:
                       type: string
-                      example: "C25NWA"
+                      example: ""
                       description: "Ký hiệu hóa đơn liên quan"
                       maxLength: 8
                     related_invoice_no:
@@ -4688,7 +4689,7 @@ components:
                       maxLength: 10
                     relation_note:
                       type: string
-                      example: "ERPWEBCASH"
+                      example: ""
                       description: "Ghi chú về hóa đơn liên quan"
                       maxLength: 255  
               exporter:

@@ -1151,12 +1151,12 @@ paths:
         - Authorization: []
       tags:
         - ERP
-      summary: "Invoices create"
+      summary: "Delivery note create"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DeliveryNoteCreateModelRequest"
+              $ref: "#/components/schemas/InvoicesCreateModelRequest"
       responses:
         "200":
           description: Success.
@@ -1183,18 +1183,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
 
-  /api/wtx/pa/v1/erp/delivery-note-issue:
+  /api/wtx/pa/v1/erp/delivery-note-delete:
     post:
       security:
         - Authorization: []
       tags:
         - ERP
-      summary: "Invoices create"
+      summary: "Delivery note delete"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DeliveryNoteCreateModelRequest"
+              $ref: "#/components/schemas/DeliveryNoteDeleteModelRequest"
       responses:
         "200":
           description: Success.
@@ -1220,6 +1220,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
+
+
   # -----------------------END-Normal-Invoice------------------------
   
   #------------------------Sender------------------------------------
@@ -6137,5 +6139,68 @@ components:
                     type: string
                     description: "" 
                     example: "Lỗi xuất phát từ client"     
+
+    DeliveryNoteDeleteModelRequest:
+      type: object
+      properties:
+        seller: 
+          type: object
+          required:
+            - tax_code
+            - store_code
+            - data_source
+          properties:
+            tax_code:
+              type: string
+              example: "1201496252"
+              description: "Tax code"
+              maxLength: 14
+            store_code:
+              type: string
+              example: "0909011123"
+              maxLength: 50
+            data_source:
+              type: string
+              example: "ERPWEBCASH"
+              description: "Data source (Default = ‘ERPWEBCASH’)"
+              maxLength: 400
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+            properties:
+              ref_id:
+                type: string
+                example: "31321331321231"
+                description: "Refid of order number (ORDER NUMBER (ref_id))"
+                maxLength: 100
+              form_no:
+                type: string
+                example: "1"
+                description: "Form no (optional)"
+                maxLength: 1
+              serial_no:
+                type: string
+                example: "C25NWA"
+                description: "Serial no (optional)"
+                maxLength: 6
+              invoice_no:
+                type: string
+                example: "123456"
+                description: "Invoice no (optional)"
+                maxLength: 8
+              invoice_date:
+                type: string
+                example: "20240101120000"
+                description: "Invoice date (yyyyMMddHHmmss, optional)"
+                maxLength: 14
+              reason:
+                type: string
+                example: "Delete draft delivery note"
+                description: "Reason for delete"
+                maxLength: 255
+
     
     #============================================= END MODEL ==========================================================

@@ -5108,7 +5108,7 @@ components:
                 items:
                   type: object
                   required:
-                    - seq
+                    - line_no # - seq
                     - item_name
                     - uom
                     - quantity
@@ -5209,7 +5209,10 @@ components:
                       example: ""
                       description: "Attribute 10"
                       maxLength: 500
-
+                    line_no:
+                      type: number
+                      example: "1"
+                      description: "Line number"
     InvoicesUpdateModelRequest:
       type: object
       properties:

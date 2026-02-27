@@ -1221,7 +1221,43 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
 
-
+  /api/wtx/pa/v1/erp/invoices-view:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - ERP
+      summary: "Preview invoices before issue"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoicesCreateModelRequest"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCreateModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
   # -----------------------END-Normal-Invoice------------------------
   
   #------------------------Sender------------------------------------

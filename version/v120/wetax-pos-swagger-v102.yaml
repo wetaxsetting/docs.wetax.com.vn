@@ -4168,6 +4168,14 @@ components:
                 type: string
                 example: ""
                 description: "Buyer CCCD"
+              buyer_passport_no:
+                type: string
+                example: ""
+                description: "Buyer passport no"
+              buyer_budget_unit_code:
+                type: string
+                example: ""
+                description: "Buyer budget unit code"
               products:
                 type: array
                 items:
@@ -5089,6 +5097,10 @@ components:
                 type: number
                 example: 147400
                 description: "Total payment amount"
+              tot_pay_vnd:
+                type: number
+                example: 147400
+                description: "Total payment amount in VND"
               attr01:
                 type: string
                 example: ""

@@ -1298,6 +1298,44 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
+ 
+  /api/wtx/pa/v1/erp/invoices-status:
+      post:
+        security:
+          - Authorization: []
+        tags:
+          - POS Invoice
+        summary: "Get status of invoices"
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetStatusInvoicesModelRequest"
+        responses:
+          "200":
+            description: Success.
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/GetStatusInvoicesModelResponse200"
+          "400":
+            description: Some fields are invalid!
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ApiResponse400"
+          "401":
+            description: Unauthorized!
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ApiResponse401"
+          "409":
+            description: Conflict!
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ApiResponse409"
   # -----------------------END-Normal-Invoice------------------------
   
   #------------------------Sender------------------------------------

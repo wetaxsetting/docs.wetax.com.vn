@@ -1304,7 +1304,7 @@ paths:
         security:
           - Authorization: []
         tags:
-          - POS Invoice
+          - ERP
         summary: "Get status of invoices"
         requestBody:
           content:

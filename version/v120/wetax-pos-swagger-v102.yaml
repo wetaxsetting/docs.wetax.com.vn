@@ -3682,7 +3682,7 @@ components:
           type: array
           items:
             type: string
-            example: "ref_id"
+            example: "ref_id" 
             description: "Invoice ID from Parter"
 
     GetStatusEPitModelRequest:

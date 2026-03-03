@@ -123,7 +123,7 @@ paths:
 
   #------------------------Partner-------------------------------------
   /api/wtx/pa/v1/partner/customer-master:
-    get:
+    post:
       security:
         - Authorization: []
       tags:

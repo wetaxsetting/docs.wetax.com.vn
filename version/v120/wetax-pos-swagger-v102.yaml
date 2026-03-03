@@ -121,6 +121,41 @@ paths:
                 $ref: "#/components/schemas/ApiResponse409"
   #------------------------END-Company--------------------------------
 
+  #------------------------Partner-------------------------------------
+  /api/wtx/pa/v1/partner/customer-master:
+    get:
+      security:
+        - Authorization: []
+      tags:
+        - Partner
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateShopsModelRequest"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+  #------------------------END-Branch--------------------------------
+
   #-------------------------Seller------------------------------------
   /api/wtx/pa/v1/seller-info:
     get:
@@ -5797,6 +5832,73 @@ components:
                 description: "Logo url"
 
     CreateShopsModelRequest:
+      type: object
+      properties:
+        tax_code:
+          type: string
+          description: "Tax code of company"
+          example: "1201496252"
+          maxLength: 14
+        data_source:
+          type: string
+          example: "ERPWEBCASH"
+          description: "Data source (Dedualt = ‘ERPWEBCASH’)"
+          maxLength: 400
+        customer:
+          type: array
+          items:
+            type: object
+            required:
+              - "cus_legal_name"
+              - "cus_tax_code"
+              - "cus_address"
+            properties:
+              cus_id:
+                type: string
+                description: "Customer ID"
+                maxLength: 14
+              cus_legal_name:
+                type: string
+                description: "Customer Legal Name"
+                maxLength: 400
+              cus_internal_name:
+                type: string
+                description: "Customer Internal Name"
+                maxLength: 400
+              cus_tax_code:
+                type: string
+                description: "Customer Tax Code"
+                maxLength: 14
+              cus_address:
+                type: string
+                description: "Address"
+                maxLength: 400
+              cus_tel:
+                type: string
+                description: "Customer Telephone"
+                maxLength: 20
+              cus_buyer_nm::
+                type: string
+                description: "Customer Buyer Name"
+                maxLength: 400
+              cus_email:
+                type: string
+                description: "Email"
+                maxLength: 50
+              cus_email_cc:
+                type: string
+                description: "Customer Email CC"
+                maxLength: 100
+              cus_nation:
+                type: string
+                description: "Customer Nation"
+                maxLength: 150
+              location:
+                type: string
+                description: "Customer Location"
+                maxLength: 150
+
+    CreateCustomerModelRequest:
       type: object
       properties:
         shops:

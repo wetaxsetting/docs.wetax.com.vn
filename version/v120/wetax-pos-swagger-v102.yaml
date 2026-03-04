@@ -5887,7 +5887,7 @@ components:
           example: "ERPWEBCASH"
           description: "Data source (Dedualt = ‘ERPWEBCASH’)"
           maxLength: 400
-        customer:
+        customers:
           type: array
           items:
             type: object

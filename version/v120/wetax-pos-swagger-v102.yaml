@@ -52,6 +52,247 @@ paths:
                 $ref: "#/components/schemas/ApiResponse409"
   #------------------------END-Authentication-------------------------
 
+  #------------------------Agency-----------------------------
+  # ==================================================== #
+#------------------------Agency Seller------------------------------------
+
+  /api/wtx/pa/v1/agency/sellers:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Create agency seller"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencySellerModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgencySellerResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/agency/sellers/shops:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Create agency seller shops"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencySellerShopsModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/agency/seller-sales:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Create agency seller bills"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencySellerSalesModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgencySellerSalesResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/agency/seller-sales/bulk-delete:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Delete agency seller bills"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencyDeleteSellerSalesModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgencyDeleteSellerSalesResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/agency/seller-sales/status:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Get agency seller sales status"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencySellerSalesStatusModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgencySellerSalesStatusResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  /api/wtx/pa/v1/agency/seller-sales/issue:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Issue agency seller invoices"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencyIssueInvoicesModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgencyIssueInvoicesResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+    
+  #------------------------END-Agency-----------------------------
+
   #------------------------Company------------------------------------
   /api/wtx/pa/v1/company/{tax_code}:
     get:
@@ -6397,6 +6638,1055 @@ components:
                 example: "Delete draft delivery note"
                 description: "Reason for delete"
                 maxLength: 255
+    AgencySellerModelRequest:
+      type: object
+      required:
+        - data_source
+        - company
+        - user_account
+      properties:
+        data_source:
+          type: string
+          maxLength: 400
+          example: "VNPT_EPAY"
+          description: "Source system (Default = VNPT_EPAY)"
+        company:
+          type: object
+          required:
+            - tax_code
+            - vietnam_name
+            - address
+            - phone_number
+            - email
+          properties:
+            tax_code:
+              type: string
+              maxLength: 14
+              example: "0312345678"
+              description: "Tax Identification Number"
+            vietnam_name:
+              type: string
+              maxLength: 400
+              example: "CÔNG TY TNHH ABC"
+              description: "Legal name (Vietnamese)"
+            english_name:
+              type: string
+              maxLength: 400
+              example: "ABC COMPANY LIMITED"
+              description: "Legal name (English)"
+            address:
+              type: string
+              maxLength: 400
+              example: "123 Nguyen Trai, HCM"
+              description: "Registered address"
+            phone_number:
+              type: string
+              maxLength: 20
+              example: "0281234567"
+              description: "Company phone"
+            fax:
+              type: string
+              maxLength: 20
+              example: ""
+              description: "Fax number"
+            email:
+              type: string
+              maxLength: 50
+              example: "abc@company.com"
+              description: "Company email"
+            website:
+              type: string
+              maxLength: 100
+              example: ""
+              description: "Website"
+            city_code:
+              type: string
+              maxLength: 4
+              example: ""
+              description: "Province/City code"
+            tax_office_name:
+              type: string
+              maxLength: 100
+              example: ""
+              description: "Managing tax authority name"
+            tax_office_id:
+              type: string
+              maxLength: 5
+              example: ""
+              description: "Managing tax authority ID"
+            bank_name:
+              type: string
+              maxLength: 400
+              example: ""
+              description: "Bank name"
+            account_no:
+              type: string
+              maxLength: 30
+              example: ""
+              description: "Bank account number"
+        representative:
+          type: object
+          properties:
+            full_name:
+              type: string
+              maxLength: 50
+              example: "Nguyen Van A"
+              description: "Representative full name"
+            phone:
+              type: string
+              maxLength: 20
+              example: "0901234567"
+              description: "Representative phone"
+            cid:
+              type: string
+              maxLength: 12
+              example: "079123456789"
+              description: "Citizen ID"
+            passport:
+              type: string
+              maxLength: 20
+              example: ""
+              description: "Passport number"
+            dob:
+              type: string
+              maxLength: 10
+              example: "1990-01-01"
+              description: "Date of birth (YYYY-MM-DD)"
+            gender:
+              type: string
+              maxLength: 1
+              example: "1"
+              description: "0: Female, 1: Male"
+            nationality:
+              type: string
+              maxLength: 50
+              example: "Vietnam"
+              description: "Nationality"
+        user_account:
+          type: object
+          required:
+            - full_name
+            - email
+            - phone_number
+            - user_id
+            - password
+            - created_by_agent_id
+          properties:
+            full_name:
+              type: string
+              maxLength: 100
+              example: "Nguyen Van A"
+              description: "Account owner name"
+            email:
+              type: string
+              maxLength: 50
+              example: "admin@company.com"
+              description: "Login email"
+            phone_number:
+              type: string
+              maxLength: 20
+              example: "0901234567"
+              description: "Login phone (OTP verification)"
+            user_id:
+              type: string
+              maxLength: 50
+              example: "admin@company.com"
+              description: "Login ID"
+            password:
+              type: string
+              maxLength: 100
+              example: "Secure@123"
+              description: "Login password"
+            created_by_agent_id:
+              type: string
+              maxLength: 100
+              example: "VNPT_AGENT_01"
+              description: "Created by agent ID"
+
+    AgencySellerResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "success"
+        data:
+          type: object
+          properties:
+            res_key:
+              type: number
+              example: 568465
+              description: "sid of sller_comp_info"
+
+    AgencySellerShopsModelRequest:
+      type: object
+      required:
+        - tax_code
+        - shops
+      properties:
+        tax_code:
+          type: string
+          maxLength: 14
+          example: "1201496252"
+          description: "Tax Identification Number"
+        shops:
+          type: array
+          items:
+            type: object
+            required:
+              - shop_code
+              - shop_name
+              - pos_no
+            properties:
+              shop_code:
+                type: string
+                maxLength: 50
+                example: "SHOP_02"
+                description: "Shop unique code"
+              shop_name:
+                type: string
+                maxLength: 400
+                example: "ABC Branch District 1"
+                description: "Shop name"
+              address:
+                type: string
+                maxLength: 400
+                example: "456 Le Loi, HCM"
+                description: "Shop address"
+              phone_number:
+                type: string
+                maxLength: 20
+                example: "0281234567"
+                description: "Shop phone"
+              fax_no:
+                type: string
+                maxLength: 20
+                example: ""
+                description: "Shop fax"
+              email:
+                type: string
+                maxLength: 50
+                example: "branch1@abc.com"
+                description: "Shop email"
+              logo:
+                type: string
+                maxLength: 500
+                example: ""
+                description: "Logo URL"
+              pos_no:
+                type: string
+                maxLength: 50
+                example: "POS_001"
+                description: "POS machine code"
+
+    AgencySellerSalesModelRequest:
+      type: object
+      properties:
+        seller:
+          type: object
+          required:
+            - tax_code
+            - store_code
+            - data_source
+          properties:
+            tax_code:
+              type: string
+              maxLength: 14
+              example: "1201496252"
+              description: "Seller tax code"
+            store_code:
+              type: string
+              maxLength: 50
+              example: "111103"
+              description: "Store code"
+            data_source:
+              type: string
+              maxLength: 400
+              example: "VNPT_EPAY"
+              description: "Data source (Default = VNPT_EPAY)"
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - ref_id
+              - store_code
+              - store_name
+              - order_date
+              - bill_no
+              - pos_no
+              - trans_type
+              - currency_code
+              - exchange_rate
+              - payment_method
+            properties:
+              ref_id:
+                type: string
+                maxLength: 100
+                example: "221b14aa-919a-026b-2cd2-cd251ddb9514"
+                description: "Unique bill ID"
+              cqt_code:
+                type: string
+                maxLength: 23
+                example: ""
+                description: "CQT code"
+              store_code:
+                type: string
+                maxLength: 50
+                example: "111103"
+                description: "Store code"
+              store_name:
+                type: string
+                maxLength: 400
+                example: "WEBCASH VIETNAM - TEST API"
+                description: "Store name"
+              order_date:
+                type: string
+                maxLength: 14
+                example: "20240911152501"
+                description: "Order date (yyyymmddhhmmss)"
+              bill_no:
+                type: string
+                maxLength: 100
+                example: "20240911DH34"
+                description: "Bill no on POS"
+              pos_no:
+                type: string
+                maxLength: 100
+                example: "001"
+                description: "POS no (Default = 001)"
+              trans_type:
+                type: string
+                maxLength: 1
+                example: "1"
+                description: "Sale Type (Default = 1)"
+              currency_code:
+                type: string
+                maxLength: 3
+                example: "VND"
+                description: "Currency code (Default = VND)"
+              exchange_rate:
+                type: number
+                example: 1
+                description: "Exchange rate (Default = 1)"
+              payment_method:
+                type: string
+                maxLength: 50
+                example: "TM/CK"
+                description: "Payment method (Default = TM/CK)"
+              buyer_comp_name:
+                type: string
+                maxLength: 400
+                example: ""
+                description: "Buyer company name"
+              buyer_comp_tax_code:
+                type: string
+                maxLength: 14
+                example: ""
+                description: "Buyer tax code"
+              buyer_comp_address:
+                type: string
+                maxLength: 400
+                example: ""
+                description: "Buyer address"
+              buyer_comp_tel:
+                type: string
+                maxLength: 20
+                example: ""
+                description: "Buyer phone"
+              buyer_nm:
+                type: string
+                maxLength: 50
+                example: ""
+                description: "Buyer name"
+              buyer_comp_email:
+                type: string
+                maxLength: 50
+                example: ""
+                description: "Buyer email"
+              buyer_cccd:
+                type: string
+                maxLength: 12
+                example: ""
+                description: "Buyer CCCD"
+              buyer_passport_no:
+                type: string
+                maxLength: 20
+                example: ""
+                description: "Buyer passport no"
+              buyer_budget_unit_code:
+                type: string
+                maxLength: 7
+                example: ""
+                description: "Buyer budget unit code"
+              vat_reduction_yn:
+                type: string
+                maxLength: 1
+                example: "N"
+                description: "VAT reduction apply flag"
+              invoice_details:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - feature
+                    - seq
+                    - item_name
+                    - uom
+                    - quantity
+                    - unit_price
+                    - total_amount
+                    - vat_amount
+                    - paying_amount
+                  properties:
+                    feature:
+                      type: number
+                      example: 1
+                      description: "Feature"
+                    seq:
+                      type: number
+                      example: 1
+                      description: "Sequence"
+                    item_code:
+                      type: string
+                      maxLength: 50
+                      example: "228785"
+                      description: "Item code"
+                    item_name:
+                      type: string
+                      maxLength: 500
+                      example: "GA RAN PHAN"
+                      description: "Item name"
+                    uom:
+                      type: string
+                      maxLength: 50
+                      example: "EA"
+                      description: "Unit of measure"
+                    quantity:
+                      type: number
+                      example: 2
+                      description: "Quantity"
+                    unit_price:
+                      type: number
+                      example: 67000
+                      description: "Unit price"
+                    dc_rate:
+                      type: number
+                      example: 0
+                      description: "Discount rate"
+                    dc_amount:
+                      type: number
+                      example: 0
+                      description: "Discount amount"
+                    total_amount:
+                      type: number
+                      example: 134000
+                      description: "Total amount"
+                    vat_rate:
+                      type: string
+                      maxLength: 11
+                      example: "10%"
+                      description: "VAT rate"
+                    vat_amount:
+                      type: number
+                      example: 13400
+                      description: "VAT amount"
+                    paying_amount:
+                      type: number
+                      example: 147400
+                      description: "Paying amount"
+                    vat_rate_item:
+                      type: string
+                      maxLength: 11
+                      example: ""
+                      description: "VAT rate of item"
+                    vat_reduction_rate:
+                      type: string
+                      maxLength: 11
+                      example: ""
+                      description: "VAT reduction rate"
+                    vat_amount_reduced:
+                      type: number
+                      example: 0
+                      description: "Reduced VAT amount"
+              products:
+                type: array
+                items:
+                  type: object
+                example: []
+                description: "Alias of invoice_details from request sample"
+
+    AgencySellerSalesResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "Success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              ref_id:
+                type: string
+                example: "2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+              sid:
+                type: string
+                example: "221b14aa-919a-026b-2cd2-cd251ddb9514"
+              status:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: "0"
+                  message:
+                    type: string
+                    example: "Insert successfully!"
+
+    AgencyDeleteSellerSalesModelRequest:
+      type: object
+      properties:
+        seller:
+          type: object
+          required:
+            - tax_code
+            - data_source
+          properties:
+            tax_code:
+              type: string
+              maxLength: 14
+              example: "1201496252"
+              description: "Seller tax code"
+            data_source:
+              type: string
+              maxLength: 400
+              example: "VNPT_EPAY"
+              description: "Data source (Default = VNPT_EPAY)"
+        invoices:
+          type: array
+          items:
+            type: string
+            maxLength: 100
+            example: "2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+
+    AgencyDeleteSellerSalesResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "Processed"
+        data:
+          type: object
+          properties:
+            total:
+              type: number
+              example: 2
+            success:
+              type: number
+              example: 1
+            failed:
+              type: number
+              example: 1
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  ref_id:
+                    type: string
+                    example: "2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+                  status:
+                    type: string
+                    example: "DELETED"
+                  reason:
+                    type: string
+                    example: "Invoice already issued"
+
+    AgencySellerSalesStatusModelRequest:
+      type: object
+      properties:
+        seller:
+          type: object
+          required:
+            - tax_code
+            - data_source
+          properties:
+            tax_code:
+              type: string
+              maxLength: 14
+              example: "1201496252"
+              description: "Seller tax code"
+            data_source:
+              type: string
+              maxLength: 400
+              example: "VNPT_EPAY"
+              description: "Data source (Default = VNPT_EPAY)"
+        invoices:
+          type: array
+          items:
+            type: string
+            maxLength: 100
+            example: "221b14aa-919a-026b-2cd2-cd251ddb9514"
+
+    AgencySellerSalesStatusResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "Success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              sid:
+                type: string
+                maxLength: 36
+                example: "2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+                description: "WeTax GUID"
+              ref_id:
+                type: string
+                maxLength: 100
+                example: "221b14aa-919a-026b-2cd2-cd251ddb9514"
+                description: "Invoice unique key"
+              symbol:
+                type: string
+                maxLength: 8
+                example: "1C24MTT"
+                description: "Invoice symbol"
+              invoice_no:
+                type: string
+                maxLength: 8
+                example: "2"
+                description: "Invoice number"
+              cqt_report_status:
+                type: string
+                maxLength: 20
+                example: "Not reported"
+                description: "CQT report status"
+              issuance_status:
+                type: string
+                maxLength: 20
+                example: "Issued"
+                description: "Issuance status"
+              email_status:
+                type: string
+                maxLength: 20
+                example: "Sent"
+                description: "Email status"
+              lookup_code:
+                type: string
+                maxLength: 50
+                example: "ESPG6V85LUWDH32"
+                description: "Lookup code"
+              lookup_url:
+                type: string
+                maxLength: 100
+                example: "https://test.wetax.com.vn/view/webcashvn?guid=2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+                description: "Lookup url"
+              cqt_code:
+                type: string
+                maxLength: 34
+                example: "M1-24-VZQYY-00600000002"
+                description: "CQT code"
+              seller_signature_time:
+                type: string
+                maxLength: 14
+                example: ""
+                description: "Seller signature time"
+              tax_signature_time:
+                type: string
+                maxLength: 14
+                example: "20240912"
+                description: "Tax signature time"
+              error_message:
+                type: string
+                maxLength: 1000
+                example: ""
+                description: "Error message"
+
+    AgencyIssueInvoicesModelRequest:
+      type: object
+      properties:
+        seller:
+          type: object
+          required:
+            - tax_code
+            - store_code
+            - store_name
+            - data_source
+          properties:
+            tax_code:
+              type: string
+              maxLength: 14
+              example: "1201496252"
+              description: "Seller tax code"
+            store_code:
+              type: string
+              maxLength: 50
+              example: "111103"
+              description: "Store code"
+            store_name:
+              type: string
+              maxLength: 400
+              example: "WEBCASH VIETNAM - TEST API"
+              description: "Store name"
+            data_source:
+              type: string
+              maxLength: 400
+              example: "VNPT_EPAY"
+              description: "Data source (Default = VNPT_EPAY)"
+        invoices:
+          type: array
+          items:
+            type: object
+            required:
+              - order_date
+              - ref_id
+              - cqt_source
+              - bill_no
+              - pos_no
+              - invoice_type
+              - form_no
+              - serial_no
+              - trans_type
+              - currency_code
+              - exchange_rate
+              - payment_method
+              - tot_amount
+              - tot_dc_amount
+              - tot_vat_amount
+              - tot_pay_amount
+              - invoice_details
+            properties:
+              order_date:
+                type: string
+                maxLength: 14
+                example: "20250101120000"
+                description: "Order date (yyyymmddhhmmss)"
+              ref_id:
+                type: string
+                maxLength: 100
+                example: "9a6100b6-141b-92ad-dedc-edce64e4b2da"
+                description: "Unique order ref id"
+              cqt_source:
+                type: string
+                maxLength: 100
+                example: "CLIENT"
+                description: "CLIENT or WETAX"
+              cqt_code:
+                type: string
+                maxLength: 23
+                example: "M1-25-VZQYY-21100004054"
+                description: "CQT code"
+              bill_no:
+                type: string
+                maxLength: 100
+                example: "20240911DH34"
+                description: "Bill no on POS"
+              pos_no:
+                type: string
+                maxLength: 100
+                example: "001"
+                description: "POS no (Default = 001)"
+              invoice_type:
+                type: string
+                maxLength: 1
+                example: "0"
+                description: "Invoice type"
+              form_no:
+                type: string
+                maxLength: 1
+                example: "1"
+                description: "Form no"
+              serial_no:
+                type: string
+                maxLength: 6
+                example: "C25MKV"
+                description: "Serial no"
+              trans_type:
+                type: string
+                maxLength: 1
+                example: "1"
+                description: "Sale Type (Default = 1)"
+              currency_code:
+                type: string
+                maxLength: 3
+                example: "VND"
+                description: "Currency code"
+              exchange_rate:
+                type: number
+                example: 1
+                description: "Exchange rate"
+              payment_method:
+                type: string
+                maxLength: 50
+                example: "TM/CK"
+                description: "Payment method"
+              buyer_comp_name:
+                type: string
+                maxLength: 400
+                example: ""
+                description: "Buyer company name"
+              buyer_comp_ename:
+                type: string
+                maxLength: 400
+                example: ""
+                description: "Buyer company english name"
+              buyer_tax_code:
+                type: string
+                maxLength: 14
+                example: ""
+                description: "Buyer tax code"
+              buyer_address:
+                type: string
+                maxLength: 400
+                example: ""
+                description: "Buyer address"
+              buyer_tel:
+                type: string
+                maxLength: 20
+                example: ""
+                description: "Buyer phone"
+              buyer_email:
+                type: string
+                maxLength: 50
+                example: ""
+                description: "Buyer email"
+              buyer_email_cc:
+                type: string
+                maxLength: 100
+                example: ""
+                description: "Buyer email cc"
+              buyer_name:
+                type: string
+                maxLength: 400
+                example: ""
+                description: "Buyer name"
+              buyer_cccd:
+                type: string
+                maxLength: 12
+                example: ""
+                description: "Buyer CCCD"
+              buyer_passport_no:
+                type: string
+                maxLength: 20
+                example: ""
+                description: "Buyer passport no"
+              buyer_budget_unit_code:
+                type: string
+                maxLength: 7
+                example: ""
+                description: "Buyer budget unit code"
+              tot_amount:
+                type: number
+                example: 134000
+                description: "Total amount"
+              tot_dc_amount:
+                type: number
+                example: 0
+                description: "Total discount amount"
+              tot_vat_amount:
+                type: number
+                example: 13400
+                description: "Total vat amount"
+              tot_pay_amount:
+                type: number
+                example: 147400
+                description: "Total pay amount"
+              vat_reduction_yn:
+                type: string
+                maxLength: 1
+                example: "N"
+                description: "VAT reduction apply flag"
+              vat_reduction_rate:
+                type: string
+                maxLength: 11
+                example: ""
+                description: "VAT reduction rate"
+              tot_vat_amount_reduced:
+                type: number
+                example: 0
+                description: "Reduced total VAT amount"
+              invoice_details:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - seq
+                    - item_name
+                    - uom
+                    - quantity
+                    - unit_price
+                    - amount
+                    - vat_amount
+                    - pay_amount
+                    - feature
+                  properties:
+                    seq:
+                      type: number
+                      example: 1
+                      description: "Sequence"
+                    item_code:
+                      type: string
+                      maxLength: 50
+                      example: "228785"
+                      description: "Item code"
+                    item_name:
+                      type: string
+                      maxLength: 500
+                      example: "GA RAN PHAN"
+                      description: "Item name"
+                    uom:
+                      type: string
+                      maxLength: 50
+                      example: "EA"
+                      description: "Unit of measure"
+                    quantity:
+                      type: number
+                      example: 2
+                      description: "Quantity"
+                    unit_price:
+                      type: number
+                      example: 67000
+                      description: "Unit price"
+                    dc_rate:
+                      type: number
+                      example: 0
+                      description: "Discount rate"
+                    dc_amount:
+                      type: number
+                      example: 0
+                      description: "Discount amount"
+                    amount:
+                      type: number
+                      example: 134000
+                      description: "Amount"
+                    vat_rate:
+                      type: string
+                      maxLength: 11
+                      example: "10%"
+                      description: "VAT rate"
+                    vat_amount:
+                      type: number
+                      example: 13400
+                      description: "VAT amount"
+                    pay_amount:
+                      type: number
+                      example: 147400
+                      description: "Pay amount"
+                    feature:
+                      type: string
+                      maxLength: 1
+                      example: "1"
+                      description: "Feature"
+                    vat_rate_item:
+                      type: string
+                      maxLength: 11
+                      example: ""
+                      description: "VAT rate of item"
+                    vat_reduction_rate:
+                      type: string
+                      maxLength: 11
+                      example: ""
+                      description: "VAT reduction rate"
+                    vat_amount_reduced:
+                      type: number
+                      example: 0
+                      description: "Reduced VAT amount"
+
+    AgencyIssueInvoicesResponse200:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            success:
+              type: boolean
+              example: true
+            message:
+              type: string
+              example: "Success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              sid:
+                type: string
+                maxLength: 36
+                example: "2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+              ref_id:
+                type: string
+                maxLength: 100
+                example: "221b14aa-919a-026b-2cd2-cd251ddb9514"
+              symbol:
+                type: string
+                maxLength: 8
+                example: "1C24MTT"
+              invoice_no:
+                type: string
+                maxLength: 8
+                example: "2"
+              cqt_report_status:
+                type: string
+                maxLength: 20
+                example: "Not reported"
+              issuance_status:
+                type: string
+                maxLength: 20
+                example: "Issued"
+              email_status:
+                type: string
+                maxLength: 20
+                example: "Sent"
+              lookup_code:
+                type: string
+                maxLength: 50
+                example: "ESPG6V85LUWDH32"
+              lookup_url:
+                type: string
+                maxLength: 100
+                example: "https://test.wetax.com.vn/view/webcashvn?guid=2a4b4ea6-ed54-241d-ad92-d92461c1ce9a"
+              cqt_code:
+                type: string
+                maxLength: 34
+                example: "M1-24-VZQYY-00600000002"
+              seller_signature_time:
+                type: string
+                maxLength: 14
+                example: ""
+              tax_signature_time:
+                type: string
+                maxLength: 14
+                example: "20240912"
+              error_message:
+                type: string
+                maxLength: 1000
+                example: ""
 
     
     #============================================= END MODEL ==========================================================

@@ -95,44 +95,44 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
 
-  # /api/wtx/pa/v1/agency/sellers-shops:
-  #   post:
-  #     security:
-  #       - Authorization: []
-  #     tags:
-  #       - Agency
-  #     summary: "Create agency seller shops"
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "#/components/schemas/AgencySellerShopsModelRequest"
+  /api/wtx/pa/v1/agency/sellers/shops:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Create agency seller shops"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgencySellerShopsModelRequest"
 
-  #     responses:
-  #       "200":
-  #         description: Success.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ApiResponse200"
-  #       "400":
-  #         description: Some fields are invalid!
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ApiResponse400"
-  #       "401":
-  #         description: Unauthorized!
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ApiResponse401"
-  #       "409":
-  #         description: Conflict!
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/ApiResponse409"
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
 
   /api/wtx/pa/v1/agency/seller-sales:
     post:

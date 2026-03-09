@@ -290,6 +290,44 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
 
+  /api/wtx/pa/v1/agency/seller-shops:
+    post:
+      security:
+        - Authorization: []
+      tags:
+        - Agency
+      summary: "Create seller shops"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSellerShopsPaModelRequest"
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
     
   #------------------------END-Agency-----------------------------
 
@@ -7687,6 +7725,66 @@ components:
                 type: string
                 maxLength: 1000
                 example: ""
+    CreateSellerShopsPaModelRequest:
+      type: object
+      required:
+        - tax_code
+        - shops
+      properties:
+        tax_code:
+          type: string
+          example: "1201496252"
+          description: "Tax Identification Number"
+          maxLength: 14
+        shops:
+          type: array
+          items:
+            type: object
+            required:
+              - shop_code
+              - shop_name
+              - pos_no
+            properties:
+              shop_code:
+                type: string
+                example: "SHOP_02"
+                description: "Shop unique code"
+                maxLength: 50
+              shop_name:
+                type: string
+                example: "ABC Branch District 1"
+                description: "Shop name"
+                maxLength: 400
+              address:
+                type: string
+                example: "456 Le Loi, HCM"
+                description: "Shop address"
+                maxLength: 400
+              phone_number:
+                type: string
+                example: "0281234567"
+                description: "Shop phone"
+                maxLength: 20
+              fax_no:
+                type: string
+                example: ""
+                description: "Shop fax"
+                maxLength: 20
+              email:
+                type: string
+                example: "branch1@abc.com"
+                description: "Shop email"
+                maxLength: 50
+              logo:
+                type: string
+                example: ""
+                description: "Logo URL"
+                maxLength: 500
+              pos_no:
+                type: string
+                example: "POS_001"
+                description: "POS machine code"
+                maxLength: 50
 
     
     #============================================= END MODEL ==========================================================

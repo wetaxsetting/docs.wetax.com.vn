@@ -95,44 +95,44 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiResponse409"
 
-  /api/wtx/pa/v1/agency/sellers/shops:
-    post:
-      security:
-        - Authorization: []
-      tags:
-        - Agency
-      summary: "Create agency seller shops"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AgencySellerShopsModelRequest"
+  # /api/wtx/pa/v1/agency/sellers-shops:
+  #   post:
+  #     security:
+  #       - Authorization: []
+  #     tags:
+  #       - Agency
+  #     summary: "Create agency seller shops"
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/AgencySellerShopsModelRequest"
 
-      responses:
-        "200":
-          description: Success.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiResponse200"
-        "400":
-          description: Some fields are invalid!
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiResponse400"
-        "401":
-          description: Unauthorized!
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiResponse401"
-        "409":
-          description: Conflict!
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiResponse409"
+  #     responses:
+  #       "200":
+  #         description: Success.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/ApiResponse200"
+  #       "400":
+  #         description: Some fields are invalid!
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/ApiResponse400"
+  #       "401":
+  #         description: Unauthorized!
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/ApiResponse401"
+  #       "409":
+  #         description: Conflict!
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/ApiResponse409"
 
   /api/wtx/pa/v1/agency/seller-sales:
     post:
@@ -7067,7 +7067,7 @@ components:
                 maxLength: 1
                 example: "N"
                 description: "VAT reduction apply flag"
-              invoice_details:
+              products:
                 type: array
                 items:
                   type: object
@@ -7152,12 +7152,6 @@ components:
                       type: number
                       example: 0
                       description: "Reduced VAT amount"
-              products:
-                type: array
-                items:
-                  type: object
-                example: []
-                description: "Alias of invoice_details from request sample"
 
     AgencySellerSalesResponse200:
       type: object

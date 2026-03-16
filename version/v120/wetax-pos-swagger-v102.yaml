@@ -400,6 +400,57 @@ paths:
                 $ref: "#/components/schemas/ApiResponse409"
   #------------------------END-Company--------------------------------
 
+  #------------------------Download-------------------------------------
+  /api/wtx/pa/v1/download/{sid}:
+    get:
+      security:
+        - Authorization: []
+      tags:
+        - Download
+      summary: "Get download PDF/XML/ALL"
+      parameters:
+        - name: sid
+          in: path
+          required: true
+          description: ID của file
+          schema:
+            type: integer
+            format: int64
+        - name: type
+          in: query
+          required: true
+          description: Loại file cần tải
+          schema:
+            type: string
+            enum: [PDF, XML, ALL]
+
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCompanyModelResponse200"
+        "400":
+          description: Some fields are invalid!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse400"
+        "401":
+          description: Unauthorized!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse401"
+        "409":
+          description: Conflict!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse409"
+
+  #------------------------END-Download--------------------------------------#
   #------------------------Partner-------------------------------------
   /api/wtx/pa/v1/partner/customer-master:
     post:

@@ -6813,11 +6813,6 @@ components:
               maxLength: 30
               example: ""
               description: "Bank account number"
-            end_point:
-              type: string
-              maxLength: 100
-              example: ""
-              description: "End point for receiving invoice data"
         representative:
           type: object
           properties:

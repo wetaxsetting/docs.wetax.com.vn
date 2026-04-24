@@ -6954,10 +6954,10 @@ components:
     AgencySellerPosConfigModelRequest:
       type: object
       required:
-        - source_system
+        - data_source
         - seller_configs
       properties:
-        source_system:
+        data_source:
           type: string
           maxLength: 400
           example: "VNPT_EPAY"
